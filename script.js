@@ -93,7 +93,7 @@ function renderGallery() {
     }
 }
 
-// Рендер отзывов (без параметра showAll)
+// Рендер отзывов с кнопкой "Подробнее"
 function renderReviews() {
     const grid = document.getElementById('reviewsGrid');
     const loadMoreBtn = document.getElementById('loadMoreReviews');
@@ -102,17 +102,21 @@ function renderReviews() {
 
     const toShow = reviews.slice(0, currentDisplayCount);
 
-    grid.innerHTML = toShow.map(r => {
-        // Проверка, что все поля существуют
+    grid.innerHTML = toShow.map((r, index) => {
         const name = r.name || 'Аноним';
         const route = r.route || 'Не указан';
         const rating = r.rating || 0;
-        const text = r.text || '';
+        const fullText = r.text || '';
         const date = r.date ? new Date(r.date).toLocaleDateString('ru-RU') : 'неизвестно';
         const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
         const avatarLetter = name ? name.charAt(0) : '?';
+
+        // Обрезаем текст до 100 символов, если он длиннее
+        const shortText = fullText.length > 100 ? fullText.slice(0, 100) + '…' : fullText;
+        const hasMore = fullText.length > 100;
+
         return `
-            <div class="review-card">
+            <div class="review-card" data-index="${index}">
                 <div class="review-header">
                     <div class="review-avatar">${avatarLetter}</div>
                     <div class="review-info">
@@ -121,13 +125,30 @@ function renderReviews() {
                     </div>
                 </div>
                 <div class="review-route">${route}</div>
-                <div class="review-text">${text}</div>
+                <div class="review-text short">${shortText}</div>
+                ${hasMore ? `<button class="btn-more" data-index="${index}">Подробнее</button>` : ''}
+                <div class="review-text full" style="display: none;">${fullText}</div>
                 <div class="review-date">${date}</div>
             </div>
         `;
     }).join('');
 
-    // Управление видимостью кнопок
+    // Добавляем обработчики для кнопок "Подробнее"
+    document.querySelectorAll('.btn-more').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = btn.closest('.review-card');
+            const shortTextDiv = card.querySelector('.review-text.short');
+            const fullTextDiv = card.querySelector('.review-text.full');
+            if (shortTextDiv && fullTextDiv) {
+                shortTextDiv.style.display = 'none';
+                fullTextDiv.style.display = 'block';
+                btn.style.display = 'none'; // скрываем кнопку после раскрытия
+            }
+        });
+    });
+
+    // Управление видимостью кнопок "Показать ещё" и "Скрыть"
     if (loadMoreBtn) {
         loadMoreBtn.style.display = currentDisplayCount < reviews.length ? 'inline-block' : 'none';
     }
