@@ -1,0 +1,1146 @@
+/* ========== СБРОС И БАЗОВЫЕ СТИЛИ ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFFFF;
+    color: #1D1D1F;
+    line-height: 1.5;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    padding-top: 0;
+}
+
+body.dark-theme {
+    background-color: #0A0A0A;
+    color: #F5F5F7;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========== ОБЩИЕ СТИЛИ КНОПОК ========== */
+.btn,
+.btn-primary,
+.btn-secondary,
+.contact-btn,
+.btn-top-booking,
+.btn-contact-booking,
+.submit-btn {
+    display: inline-block;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    line-height: normal;
+}
+
+/* Базовый вариант (тёмная кнопка) */
+.btn-primary,
+.btn-contact-booking,
+.submit-btn {
+    background-color: #1D1D1F;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 12px 32px;
+}
+
+/* ИЗМЕНЕНО: при наведении любой тёмной кнопки становится синей */
+.btn-primary:hover,
+.btn-contact-booking:hover,
+.submit-btn:hover {
+    background-color: #007AFF; /* было #333, стало #007AFF */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+body.dark-theme .btn-primary,
+body.dark-theme .btn-contact-booking,
+body.dark-theme .submit-btn {
+    background-color: #F5F5F7;
+    color: #1D1D1F;
+}
+body.dark-theme .btn-primary:hover,
+body.dark-theme .btn-contact-booking:hover,
+body.dark-theme .submit-btn:hover {
+    background-color: #fff; /* в тёмной теме при наведении оставляем белый? но по условию тоже должен быть синим? */
+    /* ИЗМЕНЕНО: пусть тоже синим будет, но более мягким */
+    background-color: #5C9EFF;
+    color: #1D1D1F;
+}
+
+/* Кнопки мессенджеров в блоке контактов */
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    padding: 14px 36px;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.contact-btn i {
+    font-size: 1.5rem;
+}
+
+.contact-btn:hover {
+    background: #007AFF;
+    transform: scale(1.05);
+    border-color: #007AFF;
+}
+
+body.dark-theme .contact-btn {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+body.dark-theme .contact-btn:hover {
+    background: #5C9EFF;
+    border-color: #5C9EFF;
+}
+
+/* Второстепенная кнопка (показать ещё / скрыть) */
+.btn-secondary {
+    background-color: transparent;
+    color: #007AFF;
+    border: 1px solid #007AFF;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.btn-secondary:hover {
+    background-color: #007AFF;
+    color: white;
+}
+
+body.dark-theme .btn-secondary {
+    border-color: #5C9EFF;
+    color: #5C9EFF;
+}
+body.dark-theme .btn-secondary:hover {
+    background-color: #5C9EFF;
+    color: #1A1A1A;
+}
+
+/* Кнопка в верхней панели */
+.btn-top-booking {
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    margin-left: 15px;
+    background-color: #1D1D1F;
+    color: white;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-top-booking:hover {
+    background-color: #333; /* нужно тоже изменить? но она входит в .btn-primary? нет, у неё свой класс, но мы можем объединить через селектор */
+    transform: translateY(-2px);
+}
+
+/* ИЗМЕНЕНО: добавим для btn-top-booking такой же эффект как у btn-primary */
+.btn-top-booking:hover {
+    background-color: #007AFF;
+}
+
+body.dark-theme .btn-top-booking {
+    background-color: #1D1D1F !important;
+    color: white !important;
+}
+body.dark-theme .btn-top-booking:hover {
+    background-color: #333 !important;
+    transform: translateY(-2px);
+}
+
+/* ========== ВЕРХНЯЯ ПАНЕЛЬ ========== */
+.top-bar {
+    background-color: #F5F5F7;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    z-index: 1000;
+}
+
+.top-bar.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-bottom: none;
+}
+
+body.dark-theme .top-bar {
+    background-color: #FFFFFF;
+    color: #1D1D1F;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+body.dark-theme .top-bar.fixed {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+}
+body.dark-theme .top-bar .social-icons a {
+    color: #1D1D1F;
+}
+body.dark-theme .top-bar .social-icons a:hover {
+    color: #007AFF;
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-info span {
+    font-weight: 500;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    color: #1D1D1F;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: #007AFF;
+}
+
+/* ========== ЛОГОТИП ========== */
+.header-main {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.logo .blue {
+    color: #007AFF;
+    font-weight: 700;
+}
+
+/* ========== HERO ========== */
+.hero {
+    padding: 60px 0 40px;
+    background-color: #F5F5F7;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .hero {
+    background-color: #F5F5F7;
+    color: #1D1D1F;
+}
+
+.hero h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 20px;
+}
+
+.hero .subhead {
+    font-size: 1.4rem;
+    color: #6e6e73;
+    max-width: 700px;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.cta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.messenger-icons {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.messenger-icons a {
+    color: #1D1D1F;
+    transition: color 0.2s;
+}
+
+.messenger-icons a:hover {
+    color: #007AFF;
+}
+
+/* ========== ПРЕИМУЩЕСТВА ========== */
+.features {
+    padding: 80px 0;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .features {
+    background-color: #FFFFFF;
+    color: #1D1D1F;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.feature-item {
+    text-align: left;
+}
+
+.feature-item i {
+    font-size: 2.2rem;
+    color: #1D1D1F;
+    margin-bottom: 20px;
+}
+
+.feature-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.feature-item p {
+    color: #6e6e73;
+    font-size: 0.95rem;
+}
+
+/* ========== ГАЛЕРЕЯ ========== */
+.gallery {
+    padding: 60px 0;
+    background-color: #F5F5F7;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .gallery {
+    background-color: #1A1A1A;
+    color: #F5F5F7;
+}
+
+.gallery h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.gallery-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .gallery-item {
+    background: #2A2A2A;
+    color: #F5F5F7;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+}
+
+body.dark-theme .gallery-item:hover {
+    box-shadow: 0 16px 30px rgba(0,0,0,0.6);
+}
+
+.gallery-item a {
+    display: block;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-item p {
+    padding: 16px 20px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    background: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .gallery-item p {
+    background: #2A2A2A;
+    color: #F5F5F7;
+}
+
+/* ========== АКЦИИ И РАСПИСАНИЕ ========== */
+.info {
+    padding: 70px 0;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .info {
+    background-color: #1A1A1A;
+    color: #F5F5F7;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.offers, .schedule {
+    background: #F5F5F7;
+    padding: 30px;
+    border-radius: 24px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .offers,
+body.dark-theme .schedule {
+    background: #2A2A2A;
+    color: #F5F5F7;
+}
+
+.info h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.info ul {
+    list-style: none;
+}
+
+.info li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+body.dark-theme .info li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.info li:last-child {
+    border-bottom: none;
+}
+
+.info li::before {
+    content: "•";
+    color: #007AFF;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* ========== ОТЗЫВЫ ========== */
+.reviews {
+    padding: 70px 0;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .reviews {
+    background-color: #1A1A1A;
+    color: #F5F5F7;
+}
+
+.reviews h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.review-card {
+    background: #F5F5F7;
+    border-radius: 20px;
+    padding: 24px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #007AFF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.review-info h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.review-rating {
+    color: #FFB800;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.review-route {
+    font-size: 0.9rem;
+    color: #6e6e73;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1D1D1F;
+    margin-bottom: 15px;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #6e6e73;
+    text-align: right;
+}
+
+.reviews-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.reviews-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Ссылка "Показать все отзывы" */
+.show-all-link {
+    color: #007AFF;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.show-all-link:hover {
+    color: #005BB5;
+    text-decoration: none;
+}
+
+/* ========== FAQ (аккордеон) ========== */
+.faq {
+    padding: 70px 0;
+    background-color: #F5F5F7;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .faq {
+    background-color: #1A1A1A;
+    color: #F5F5F7;
+}
+
+.faq h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #1D1D1F;
+}
+
+body.dark-theme .faq h2 {
+    color: #F5F5F7;
+}
+
+.faq-grid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+body.dark-theme .faq-item {
+    background: #2A2A2A;
+}
+
+.faq-question {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1D1D1F;
+    transition: color 0.3s;
+}
+
+body.dark-theme .faq-question {
+    color: #F5F5F7;
+}
+
+.faq-question i {
+    color: #007AFF;
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    padding: 0 24px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background-color: #F9F9F9;
+    border-top: 1px solid transparent;
+}
+
+body.dark-theme .faq-answer {
+    background-color: #1F1F1F;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+    padding: 20px 24px;
+    border-top-color: #e0e0e0;
+}
+
+body.dark-theme .faq-item.active .faq-answer {
+    border-top-color: #333;
+}
+
+.faq-answer p {
+    color: #4A4A4A;
+    line-height: 1.6;
+    transition: color 0.3s;
+}
+
+body.dark-theme .faq-answer p {
+    color: #A0A0A0;
+}
+
+/* ========== КОНТАКТНЫЙ БЛОК ========== */
+.contact {
+    padding: 70px 0;
+    background-color: #1D1D1F;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .contact {
+    background-color: #0A0A0A;
+    color: white;
+}
+
+.contact h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ИЗМЕНЕНО: управление отступами для кнопки "Забронировать онлайн" в контактах */
+.btn-contact-booking {
+    margin: 0 auto 10px; /* Убираем верхний отступ, уменьшаем нижний до 10px */
+    display: inline-block;
+    padding: 16px 48px;   /* увеличиваем отступы */
+    font-size: 1.3rem;     /* увеличиваем шрифт */
+}
+
+.contact p {
+    font-size: 1.2rem;
+}
+
+.contact a[href^="tel"] {
+    color: #007AFF;
+    font-weight: 600;
+}
+
+/* ========== ПОДВАЛ ========== */
+footer {
+    padding: 30px 0;
+    background-color: #F5F5F7;
+    color: #6e6e73;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme footer {
+    background-color: #1A1A1A;
+    color: #A0A0A0;
+    border-top: 1px solid #333;
+}
+
+/* ========== МОДАЛЬНЫЕ ОКНА ========== */
+.modal, .privacy-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content, .privacy-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 24px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+.privacy-content {
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal, .close-privacy {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: 300;
+    color: #6e6e73;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.close-modal:hover, .close-privacy:hover {
+    color: #1D1D1F;
+}
+
+.modal h2, .privacy-content h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #1D1D1F;
+}
+
+.modal p, .privacy-content p {
+    color: #6e6e73;
+    margin-bottom: 25px;
+}
+
+.privacy-content h4 {
+    font-size: 1.2rem;
+    margin: 20px 0 10px;
+    color: #1D1D1F;
+}
+
+.privacy-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    color: #4A4A4A;
+}
+
+/* ========== ФОРМЫ ========== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #1D1D1F;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    background: #F5F5F7;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007AFF;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+/* Тип заказа */
+.order-type {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-card {
+    flex: 1;
+    cursor: pointer;
+}
+
+.radio-card input[type="radio"] {
+    display: none;
+}
+
+.radio-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    background: #F5F5F7;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.radio-card input[type="radio"]:checked + .radio-content {
+    border-color: #007AFF;
+    background: #E5F1FF;
+}
+
+.radio-content i {
+    font-size: 1.5rem;
+    color: #1D1D1F;
+}
+
+.radio-card input[type="radio"]:checked + .radio-content i {
+    color: #007AFF;
+}
+
+/* ИЗМЕНЕНО: стили для выбранного типа заказа в тёмной теме */
+body.dark-theme .radio-content {
+    background: #2A2A2A;
+    color: #F5F5F7;
+}
+body.dark-theme .radio-card input[type="radio"]:checked + .radio-content {
+    background: #E5F1FF;  /* оставляем светлый фон для контраста */
+    color: #1D1D1F;       /* чёрный текст */
+}
+body.dark-theme .radio-card input[type="radio"]:checked + .radio-content i {
+    color: #007AFF;
+}
+
+/* Способ связи */
+.contact-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: #F5F5F7;
+    padding: 15px;
+    border-radius: 16px;
+}
+
+.contact-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0;
+    color: #1D1D1F;
+}
+
+.contact-options input[type="radio"] {
+    accent-color: #007AFF;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+/* Дата и время */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group.half {
+    flex: 1;
+}
+
+/* Галочка согласия */
+.consent-group {
+    margin: 20px 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #007AFF;
+    cursor: pointer;
+}
+
+.checkbox-text {
+    font-size: 0.9rem;
+    color: #6e6e73;
+    line-height: 1.4;
+}
+
+.checkbox-text a {
+    color: #007AFF;
+    text-decoration: underline;
+}
+
+.checkbox-text a:hover {
+    text-decoration: none;
+}
+
+/* Звёзды рейтинга */
+.rating-stars {
+    display: flex;
+    gap: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.star {
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.star.active {
+    color: #FFB800;
+}
+
+.star:hover {
+    color: #FFB800;
+}
+
+/* Кнопка отправки (уже включена в общие стили) */
+.submit-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* ========== ТЁМНАЯ ТЕМА ДЛЯ МОДАЛЬНЫХ ОКОН ========== */
+body.dark-theme .modal-content,
+body.dark-theme .privacy-content {
+    background-color: #1A1A1A;
+    color: #F5F5F7;
+}
+
+body.dark-theme .modal h2,
+body.dark-theme .privacy-content h3,
+body.dark-theme .privacy-content h4,
+body.dark-theme .form-group label {
+    color: #F5F5F7;
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group select,
+body.dark-theme .form-group textarea,
+body.dark-theme .radio-content,
+body.dark-theme .contact-options {
+    background: #2A2A2A;
+    border-color: #333;
+    color: #F5F5F7;
+}
+
+body.dark-theme .checkbox-text {
+    color: #A0A0A0;
+}
+
+body.dark-theme .checkbox-text a {
+    color: #5C9EFF;
+}
+
+body.dark-theme .close-modal,
+body.dark-theme .close-privacy {
+    color: #A0A0A0;
+}
+
+body.dark-theme .close-modal:hover,
+body.dark-theme .close-privacy:hover {
+    color: #F5F5F7;
+}
+
+/* ========== АДАПТАЦИЯ ========== */
+@media (max-width: 992px) {
+    .hero h1 { font-size: 2.6rem; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero .subhead { font-size: 1.2rem; }
+    .cta { flex-direction: column; align-items: flex-start; }
+    .features-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item img { height: 300px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; gap: 20px; }
+    .contact-buttons { flex-direction: column; align-items: center; }
+    .contact-btn { width: 100%; max-width: 300px; }
+    .top-bar .container { justify-content: center; }
+    .btn-top-booking {
+        margin-top: 8px;
+        margin-left: 0;
+        width: auto;
+    }
+    .logo { font-size: 1.8rem; }
+    .form-row { flex-direction: column; gap: 0; }
+    .order-type { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.8rem; }
+    .logo { font-size: 1.5rem; }
+    .modal-content { padding: 20px; }
+}
