@@ -71,6 +71,33 @@ function renderInfo(offers, schedule) {
     if (scheduleList) scheduleList.innerHTML = schedule.map(s => `<li>${s}</li>`).join('');
 }
 
+// Рендер FAQ (аккордеон)
+function renderFaq(items) {
+    const container = document.getElementById('faqGrid');
+    if (!container) return;
+    container.innerHTML = items.map(item => `
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>${item.question}</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>${item.answer}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // Инициализация аккордеона
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+    });
+}
+
 // Асинхронная функция загрузки всех данных из Supabase
 async function loadAllDataFromSupabase() {
     try {
@@ -115,6 +142,15 @@ async function loadAllDataFromSupabase() {
             .select('*')
             .single();
         if (!infoError && info) renderInfo(info.offers, info.schedule);
+
+        // 6. FAQ
+        let { data: faqData, error: faqError } = await window.supabase
+            .from('faq')
+            .select('*')
+            .order('sort_order', { ascending: true });
+        if (!faqError && faqData) {
+            renderFaq(faqData);
+        }
 
     } catch (e) {
         console.error('Общая ошибка загрузки:', e);
@@ -194,6 +230,7 @@ function renderReviews() {
         `;
     }).join('');
 
+    // Обработчики для кнопок "Подробнее"
     document.querySelectorAll('.btn-more').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -208,6 +245,7 @@ function renderReviews() {
         });
     });
 
+    // Управление кнопками "Показать ещё" и "Скрыть"
     if (loadMoreBtn) {
         loadMoreBtn.style.display = currentDisplayCount < reviews.length ? 'inline-block' : 'none';
     }
@@ -224,18 +262,6 @@ function loadMoreReviews() {
 function hideReviews() {
     currentDisplayCount = 3;
     renderReviews();
-}
-
-// FAQ аккордеон
-function initFaq() {
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.parentElement;
-            const isActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-            if (!isActive) item.classList.add('active');
-        });
-    });
 }
 
 // Инициализация модальных окон
@@ -415,7 +441,6 @@ function initMaxLinks() {
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllDataFromSupabase();
     renderGallery();
-    initFaq();
     initModals();
     initScrollEffects();
     initMaxLinks();
