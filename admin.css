@@ -150,3 +150,17 @@ button:hover {
 .rating-input span.active {
     color: #FFB800;
 }
+
+/* Стили для элементов FAQ в админке */
+.faq-item {
+    background: #F5F5F7;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.faq-item h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1D1D1F;
+}

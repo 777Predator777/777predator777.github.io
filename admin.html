@@ -24,6 +24,7 @@
                 <button class="tab-btn" onclick="showTab('reviews')">Отзывы</button>
                 <button class="tab-btn" onclick="showTab('contacts')">Контакты</button>
                 <button class="tab-btn" onclick="showTab('info')">Акции и расписание</button>
+                <button class="tab-btn" onclick="showTab('faq')">FAQ</button>
             </div>
 
             <!-- Вкладка Hero -->
@@ -93,6 +94,13 @@
                     <label>Расписание (каждая строка — один рейс):</label>
                     <textarea id="scheduleList" rows="5" class="form-control"></textarea>
                 </div>
+            </div>
+
+            <!-- Вкладка FAQ -->
+            <div id="faqTab" class="tab-content">
+                <h3>Редактирование вопросов-ответов (FAQ)</h3>
+                <div id="faq-list"></div>
+            <button class="btn-add" onclick="addFaqItem()">+ Добавить вопрос</button>
             </div>
 
             <button onclick="saveAllData()" class="btn-save">Сохранить все изменения</button>

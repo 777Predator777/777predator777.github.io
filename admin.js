@@ -3,6 +3,7 @@
 // Глобальные переменные для хранения текущих списков
 let currentFeatures = [];
 let currentReviews = [];
+let currentFaq = []; // добавлено
 
 // Функция для загрузки всех данных из Supabase в форму
 async function loadDataFromSupabase() {
@@ -60,6 +61,10 @@ async function loadDataFromSupabase() {
       document.getElementById('offersList').value = info.offers.join('\n');
       document.getElementById('scheduleList').value = info.schedule.join('\n');
     }
+
+    // FAQ
+    await loadFaqFromSupabase();
+
   } catch (e) {
     console.error('Ошибка загрузки данных:', e);
   }
@@ -258,13 +263,78 @@ async function saveInfo() {
   if (error) console.error('Ошибка сохранения info:', error);
 }
 
-// ==== КНОПКА "СОХРАНИТЬ ВСЁ" ====
+// ==== ФУНКЦИИ ДЛЯ FAQ ====
+async function loadFaqFromSupabase() {
+  const { data, error } = await supabase
+    .from('faq')
+    .select('*')
+    .order('sort_order', { ascending: true });
+  if (!error && data) {
+    currentFaq = data;
+    renderFaqList(data);
+  } else {
+    console.error('Ошибка загрузки FAQ:', error);
+  }
+}
+
+function renderFaqList(faqItems) {
+  const container = document.getElementById('faq-list');
+  if (!container) return;
+  container.innerHTML = '';
+  faqItems.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = `
+      <h4>Вопрос ${index + 1}</h4>
+      <div class="form-group">
+        <label>Вопрос:</label>
+        <input type="text" class="form-control faq-question" value="${item.question.replace(/"/g, '&quot;')}">
+      </div>
+      <div class="form-group">
+        <label>Ответ:</label>
+        <textarea class="form-control faq-answer" rows="3">${item.answer.replace(/"/g, '&quot;')}</textarea>
+      </div>
+      <button class="btn-remove" onclick="removeFaqItem(${index})">Удалить</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+window.addFaqItem = function() {
+  currentFaq.push({ question: "Новый вопрос", answer: "Ответ на вопрос" });
+  renderFaqList(currentFaq);
+};
+
+window.removeFaqItem = function(index) {
+  currentFaq.splice(index, 1);
+  renderFaqList(currentFaq);
+};
+
+async function saveFaq() {
+  const questionInputs = document.querySelectorAll('#faq-list .faq-question');
+  const answerInputs = document.querySelectorAll('#faq-list .faq-answer');
+  const faqItems = [];
+  for (let i = 0; i < questionInputs.length; i++) {
+    faqItems.push({
+      question: questionInputs[i].value,
+      answer: answerInputs[i].value,
+      sort_order: i
+    });
+  }
+  // Удаляем старые и вставляем новые
+  await supabase.from('faq').delete().neq('id', 0);
+  const { error } = await supabase.from('faq').insert(faqItems);
+  if (error) console.error('Ошибка сохранения FAQ:', error);
+}
+
+// ==== КНОПКА "СОХРАНИТЬ ВСЁ" (добавлен saveFaq) ====
 window.saveAllData = async function() {
   await saveHero();
   await saveFeatures();
   await saveReviews();
   await saveContacts();
   await saveInfo();
+  await saveFaq(); // добавлено
   alert('Все данные сохранены в облаке!');
 };
 
