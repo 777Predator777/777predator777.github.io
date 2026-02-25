@@ -26,12 +26,8 @@
         <div class="container">
             <div class="contact-info">
                 <span><i class="fas fa-phone-alt"></i> +7 (999) 123-45-67</span>
-        </div>
-            <button class="btn btn-primary btn-top-booking booking-trigger">Забронировать</button>
-         </div>
-    </div>
-                </div>
             </div>
+            <button class="btn btn-primary btn-top-booking booking-trigger">Забронировать</button>
         </div>
     </div>
 
@@ -94,7 +90,7 @@
         </div>
     </section>
 
-    <!-- *** ДОБАВЛЕННЫЙ БЛОК: Акции и расписание *** -->
+    <!-- Акции и расписание -->
     <section class="info">
         <div class="container">
             <div class="info-grid">
@@ -117,7 +113,6 @@
             </div>
         </div>
     </section>
-    <!-- ***************************************** -->
 
     <!-- Блок отзывов -->
     <section class="reviews">
@@ -126,88 +121,37 @@
             <div class="reviews-grid" id="reviewsGrid"></div>
             <div class="reviews-footer">
                 <div class="reviews-controls">
-                <button class="btn btn-secondary" id="loadMoreReviews" style="display: none;">Показать ещё</button>
-            <button class="btn btn-secondary" id="hideReviews" style="display: none;">Скрыть</button>
-        </div>
-    <button class="btn btn-primary" id="addReviewBtn">Оставить отзыв</button>
-</div>
+                    <button class="btn btn-secondary" id="loadMoreReviews" style="display: none;">Показать ещё</button>
+                    <button class="btn btn-secondary" id="hideReviews" style="display: none;">Скрыть</button>
+                </div>
+                <button class="btn btn-primary" id="addReviewBtn">Оставить отзыв</button>
+            </div>
         </div>
     </section>
 
-<!-- Блок вопросов-ответов (аккордеон) -->
-<section class="faq">
-    <div class="container">
-        <h2>Часто задаваемые вопросы</h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Какие документы нужны для поездки?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Для поездки необходим загранпаспорт. Для поездок в Европу также нужна виза (шенгенская или национальная в зависимости от страны). Для детей нужно свидетельство о рождении и нотариальное согласие от второго родителя при необходимости.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Сколько багажа можно взять?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>В стоимость включено 1 место ручной клади (до 5 кг, 55×40×20 см) и 1 место багажа (до 20 кг, сумма трёх измерений до 200 см). Дополнительный багаж оплачивается отдельно — 500₽ за место.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Как передать посылку?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>При оформлении заявки выберите тип "Посылка". Укажите маршрут, вес и габариты. Оператор свяжется с вами для подтверждения и сообщит, куда привезти посылку. Отправитель и получатель должны иметь при себе паспорт.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Как отменить или перенести поездку?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Отмена возможна не позднее чем за 24 часа до отправления — возврат 100% (за вычетом комиссии). При отмене менее чем за 24 часа возврат 50%. Для переноса даты свяжитесь с оператором в WhatsApp или Telegram.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Где происходит посадка?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Посадка осуществляется на автовокзалах или в согласованных точках посадки. Точное место указывается при подтверждении заказа. Возможен подбор адреса "от двери" за дополнительную плату.</p>
-                </div>
-            </div>
+    <!-- Блок вопросов-ответов (аккордеон) -->
+    <section class="faq">
+        <div class="container">
+            <h2>Часто задаваемые вопросы</h2>
+            <div class="faq-grid" id="faqGrid"></div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Контакты и мессенджеры -->
-<section class="contact">
-    <div class="container">
-        <h2>Свяжитесь для бронирования</h2>
-        
-        <!-- Кнопка бронирования (отдельно) -->
-        <button class="btn btn-primary btn-contact-booking booking-trigger">Забронировать</button>
-        
-        <!-- Контейнер для кнопок мессенджеров (именно он отвечает за строку) -->
-        <div class="contact-buttons">
-            <a href="#" class="contact-btn telegram"><i class="fab fa-telegram"></i> Telegram</a>
-            <a href="#" class="contact-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#" class="contact-btn viber"><i class="fab fa-viber"></i> Viber</a>
-            <a href="#" class="contact-btn vk"><i class="fab fa-vk"></i> VK</a>
-            <a href="#" class="contact-btn" id="max-btn"><i class="fab fa-vk"></i> MAX</a>
+    <section class="contact">
+        <div class="container">
+            <h2>Свяжитесь для бронирования</h2>
+            <button class="btn btn-primary btn-contact-booking booking-trigger">Забронировать</button>
+            <div class="contact-buttons">
+                <a href="#" class="contact-btn telegram"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#" class="contact-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#" class="contact-btn viber"><i class="fab fa-viber"></i> Viber</a>
+                <a href="#" class="contact-btn vk"><i class="fab fa-vk"></i> VK</a>
+                <a href="#" class="contact-btn" id="max-btn"><i class="fab fa-vk"></i> MAX</a>
+            </div>
+            <p>Или позвоните: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
         </div>
-        
-        <p>Или позвоните: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
-    </div>
-</section>
+    </section>
 
     <!-- Подвал -->
     <footer>
@@ -216,186 +160,23 @@
         </div>
     </footer>
 
-    <!-- Модальное окно для бронирования -->
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Забронировать</h2>
-            <p>Оставьте заявку, и мы свяжемся с вами для подтверждения</p>
-            
-            <form id="bookingForm">
-                <!-- Тип заказа -->
-                <div class="form-group">
-                    <label>Тип заказа</label>
-                    <div class="order-type">
-                        <label class="radio-card">
-                            <input type="radio" name="orderType" value="trip" checked>
-                            <span class="radio-content">
-                                <i class="fas fa-car"></i>
-                                <span>Поездка</span>
-                            </span>
-                        </label>
-                        <label class="radio-card">
-                            <input type="radio" name="orderType" value="parcel">
-                            <span class="radio-content">
-                                <i class="fas fa-box"></i>
-                                <span>Посылка</span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
+    <!-- Модальные окна (без изменений, можно оставить как у вас) -->
+    <div class="modal" id="bookingModal">...</div>
+    <div class="privacy-modal" id="privacyModal">...</div>
+    <div class="modal" id="reviewModal">...</div>
 
-                <!-- Маршрут -->
-                <div class="form-group">
-                    <label for="route">Маршрут</label>
-                    <select id="route" name="route" required>
-                        <option value="" disabled selected>Выберите направление</option>
-                        <option value="msk-ber">Москва → Берлин</option>
-                        <option value="ber-msk">Берлин → Москва</option>
-                        <option value="msk-waw">Москва → Варшава</option>
-                        <option value="waw-msk">Варшава → Москва</option>
-                        <option value="msk-prg">Москва → Прага</option>
-                        <option value="prg-msk">Прага → Москва</option>
-                        <option value="other">Другое направление</option>
-                    </select>
-                </div>
-
-                <!-- Другой маршрут -->
-                <div class="form-group" id="otherRouteGroup" style="display: none;">
-                    <label for="otherRoute">Укажите маршрут</label>
-                    <input type="text" id="otherRoute" name="otherRoute" placeholder="Например: Москва → Минск">
-                </div>
-
-                <!-- Дата и время -->
-                <div class="form-row">
-                    <div class="form-group half">
-                        <label for="date">Дата</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                    <div class="form-group half">
-                        <label for="time">Время</label>
-                        <input type="time" id="time" name="time" required>
-                    </div>
-                </div>
-
-                <!-- Контактные данные -->
-                <div class="form-group">
-                    <label for="name">Ваше имя</label>
-                    <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Номер телефона</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
-                </div>
-
-                <!-- Способ связи -->
-                <div class="form-group">
-                    <label>Предпочтительный способ связи</label>
-                    <div class="contact-options">
-                        <label><input type="radio" name="contact" value="telegram" checked> <i class="fab fa-telegram"></i> Telegram</label>
-                        <label><input type="radio" name="contact" value="whatsapp"> <i class="fab fa-whatsapp"></i> WhatsApp</label>
-                        <label><input type="radio" name="contact" value="viber"> <i class="fab fa-viber"></i> Viber</label>
-                        <label><input type="radio" name="contact" value="vk"> <i class="fab fa-vk"></i> VK</label>
-                        <label><input type="radio" name="contact" value="max"> <i class="fab fa-vk" style="color: #0077FF;"></i> MAX</label>
-                        <label><input type="radio" name="contact" value="call"> <i class="fas fa-phone"></i> Звонок</label>
-                    </div>
-                </div>
-
-                <!-- Комментарий -->
-                <div class="form-group">
-                    <label for="comment">Комментарий (необязательно)</label>
-                    <textarea id="comment" name="comment" rows="2" placeholder="Дополнительная информация..."></textarea>
-                </div>
-
-                <!-- Галочка согласия -->
-                <div class="form-group consent-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <span class="checkbox-text">Я согласен на <a href="#" id="showPrivacyPolicy">обработку персональных данных</a> и получение сообщений в выбранных мессенджерах</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary submit-btn">Отправить заявку</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Модальное окно с политикой конфиденциальности -->
-    <div class="privacy-modal" id="privacyModal">
-        <div class="privacy-content">
-            <span class="close-privacy" id="closePrivacy">&times;</span>
-            <h3>Политика конфиденциальности</h3>
-            <p>Настоящим я даю согласие ООО "inDriver72" на обработку моих персональных данных, указанных в форме бронирования, включая сбор, систематизацию, накопление, хранение, уточнение, использование, распространение и уничтожение.</p>
-            
-            <h4>Цели обработки персональных данных:</h4>
-            <ul>
-                <li>Оформление и подтверждение заказа на бронирование поездки или доставки посылки</li>
-                <li>Связь с вами по телефону, SMS или в мессенджерах для уточнения деталей заказа</li>
-                <li>Информирование о статусе выполнения заказа</li>
-                <li>Направление уведомлений о подтверждении заказа</li>
-            </ul>
-            
-            <h4>Способы связи:</h4>
-            <p>Я согласен на получение сообщений в выбранных мной мессенджерах (Telegram, WhatsApp, Viber, VK, MAX) от представителей компании с информацией о моём заказе.</p>
-            
-            <h4>Срок действия согласия:</h4>
-            <p>Настоящее согласие действует с момента отправки формы и до момента достижения целей обработки или до моего отзыва согласия.</p>
-            
-            <p>Я подтверждаю, что ознакомлен с правами субъекта персональных данных и понимаю, что могу отозвать своё согласие, направив письменное уведомление на электронную почту privacy@indriver72.ru.</p>
-            
-            <p style="margin-top: 20px; font-weight: 600;">Нажимая кнопку "Отправить заявку", вы подтверждаете своё согласие с указанными условиями.</p>
-        </div>
-    </div>
-
-    <!-- Модальное окно для добавления отзыва -->
-    <div class="modal" id="reviewModal">
-        <div class="modal-content" style="max-width: 500px;">
-            <span class="close-modal" id="closeReviewModal">&times;</span>
-            <h2>Оставить отзыв</h2>
-            <form id="reviewForm">
-                <div class="form-group">
-                    <label for="reviewName">Ваше имя</label>
-                    <input type="text" id="reviewName" name="reviewName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reviewRoute">Маршрут</label>
-                    <input type="text" id="reviewRoute" name="reviewRoute" placeholder="Например: Москва → Берлин" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Оценка</label>
-                    <div class="rating-stars">
-                        <span class="star" data-rating="1">★</span>
-                        <span class="star" data-rating="2">★</span>
-                        <span class="star" data-rating="3">★</span>
-                        <span class="star" data-rating="4">★</span>
-                        <span class="star" data-rating="5">★</span>
-                    </div>
-                    <input type="hidden" id="reviewRating" name="reviewRating" value="5">
-                </div>
-                
-                <div class="form-group">
-                    <label for="reviewText">Ваш отзыв</label>
-                    <textarea id="reviewText" name="reviewText" rows="4" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-primary submit-btn">Отправить отзыв</button>
-            </form>
-        </div>
-    </div>
+    <!-- Сначала подключаем библиотеку Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://mqpkzzxwmgjxhczryebs.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xcGt6enh3bWdqeGhjenJ5ZWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDc1MTIsImV4cCI6MjA4NzU4MzUxMn0.g1MD9v3yKMmZn9TseMC72VHi7P8yDpHOUFZhWHKOTsY';
+        window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    </script>
 
     <!-- GLightbox JS -->
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-    <!-- Наш скрипт -->
+
+    <!-- Ваш основной скрипт -->
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // Создаем клиента для работы с твоим проектом
-  const supabaseUrl = 'https://mqpkzzxwmgjxhczryebs.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xcGt6enh3bWdqeGhjenJ5ZWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDc1MTIsImV4cCI6MjA4NzU4MzUxMn0.g1MD9v3yKMmZn9TseMC72VHi7P8yDpHOUFZhWHKOTsY';
-  window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
-</script>
 </body>
 </html>
