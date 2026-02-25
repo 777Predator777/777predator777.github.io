@@ -32,167 +32,105 @@ const photos = [
     }
 ];
 
-// Асинхронная функция для загрузки всех данных из Supabase
-async function loadAllDataFromSupabase() {
-  try {
-    // 1. Загружаем hero-блок
-    let { data: hero, error } = await window.supabase
-      .from('hero')
-      .select('*')
-      .single(); // .single() потому что там только одна строка с id=1
-    if (error) console.error('Ошибка загрузки hero:', error);
-    else {
-      document.querySelector('.hero h1').innerHTML = hero.title;
-      document.querySelector('.hero .subhead').textContent = hero.subtitle;
-    }
-
-    // 2. Загружаем преимущества (features)
-    let { data: features, error: featError } = await window.supabase
-      .from('features')
-      .select('*')
-      .order('sort_order', { ascending: true });
-    if (!featError && features) {
-      // Передаем массив features в функцию renderFeatures (ее мы создадим ниже)
-      renderFeatures(features);
-    }
-
-    // 3. Загружаем отзывы (reviews) – без изменений на месте старых `reviews`
-    let { data: reviewsData, error: revError } = await window.supabase
-      .from('reviews')
-      .select('*')
-      .order('date', { ascending: false });
-    if (!revError && reviewsData) {
-      window.reviews = reviewsData; // Сохраняем в глобальную переменную
-      renderReviews(); // Перерисовываем отзывы
-    }
-
-    // 4. Загружаем контакты (contacts)
-    let { data: contacts, error: contError } = await window.supabase
-      .from('contacts')
-      .select('*')
-      .single();
-    if (!contError && contacts) {
-      // Функция для обновления контактов в интерфейсе
-      renderContacts(contacts);
-    }
-
-    // 5. Загружаем акции и расписание (info)
-    let { data: info, error: infoError } = await window.supabase
-      .from('info')
-      .select('*')
-      .single();
-    if (!infoError && info) {
-      renderInfo(info.offers, info.schedule);
-    }
-  } catch (e) {
-    console.error('Общая ошибка загрузки:', e);
-  }
-}
-
-// Пример функции renderFeatures (создайте её, если ещё нет)
-function renderFeatures(features) {
-  const container = document.querySelector('.features-grid');
-  if (!container) return;
-  container.innerHTML = features.map(f => `
-    <div class="feature-item">
-      <i class="fas ${f.icon}"></i>
-      <h3>${f.title}</h3>
-      <p>${f.description}</p>
-    </div>
-  `).join('');
-}
-
-// Функция для обновления контактов
-function renderContacts(contacts) {
-  const phoneSpan = document.querySelector('.contact-info span');
-  if (phoneSpan) phoneSpan.innerHTML = `<i class="fas fa-phone-alt"></i> ${contacts.phone}`;
-  const telegramBtn = document.querySelector('.contact-btn.telegram');
-  if (telegramBtn) telegramBtn.href = contacts.telegram;
-  // ... аналогично для WhatsApp, Viber, VK, MAX
-}
-
-// Функция для обновления акций и расписания
-function renderInfo(offers, schedule) {
-  const offersList = document.querySelector('.offers ul');
-  if (offersList) offersList.innerHTML = offers.map(o => `<li>${o}</li>`).join('');
-  const scheduleList = document.querySelector('.schedule ul');
-  if (scheduleList) scheduleList.innerHTML = schedule.map(s => `<li>${s}</li>`).join('');
-}
-
-// ===== ДАННЫЕ ИЗ LOCALSTORAGE =====
-// Загрузка данных из localStorage или использование начальных
-const heroData = JSON.parse(localStorage.getItem('indriver72_hero')) || {
-    title: "Международные пассажирские перевозки<br>и доставка посылок",
-    subtitle: "Комфорт, надёжность и фиксированная цена. Индивидуальный трансфер на легковых автомобилях и минивэнах. Доставим Ваши посылки в любую точку."
-};
-
-let features = JSON.parse(localStorage.getItem('indriver72_features')) || [
-    { icon: "fa-box", title: "Перевозка посылок", text: "Быстрая и надёжная доставка ваших грузов." },
-    { icon: "fa-tag", title: "Фиксированная цена", text: "Никаких скрытых платежей и сюрпризов." },
-    { icon: "fa-couch", title: "Комфорт премиум-класса", text: "Автомобили бизнес-класса, кожаный салон, климат-контроль." },
-    { icon: "fa-child", title: "Детские кресла", text: "Безопасность для самых маленьких." }
-];
-
-// Загрузка отзывов из localStorage или начальные
-let storedReviews = JSON.parse(localStorage.getItem('inDriver72_reviews')) || [];
-let reviews = storedReviews.filter(r => r && typeof r === 'object' && r.name);
-
-if (reviews.length === 0) {
-    reviews = [
-        {
-            name: "Алексей Петров",
-            route: "Москва → Берлин",
-            rating: 5,
-            text: "Отличная поездка! Автобус комфортный, водитель профессионал. Всё вовремя, без нареканий. Обязательно поеду ещё.",
-            date: "2026-02-15"
-        },
-        {
-            name: "Елена Смирнова",
-            route: "Берлин → Москва",
-            rating: 5,
-            text: "Перевозила посылку с документами. Всё доставили быстро и в целости. Очень удобно, что можно отслеживать через WhatsApp.",
-            date: "2026-02-10"
-        },
-        {
-            name: "Михаил Иванов",
-            route: "Москва → Варшава",
-            rating: 4,
-            text: "Хороший сервис, машина чистая, кондиционер работал. Немного задержались на границе, но это не от них зависело.",
-            date: "2026-02-05"
-        }
-    ];
-}
-
-// Контакты
-const contacts = JSON.parse(localStorage.getItem('indriver72_contacts')) || {
-    phone: "+7 (999) 123-45-67",
-    telegram: "#",
-    whatsapp: "#",
-    viber: "#",
-    vk: "#",
-    max: "#"
-};
-
-// Акции и расписание
-const infoData = JSON.parse(localStorage.getItem('indriver72_info')) || {
-    offers: [
-        "Скидка 10% на обратный билет",
-        "Детское кресло бесплатно при бронировании за 2 недели",
-        "Спецпредложение для групп от 5 человек"
-    ],
-    schedule: [
-        "Москва → Берлин: ежедневно, 08:00, 20:00",
-        "Берлин → Москва: ежедневно, 10:00, 22:00",
-        "Москва → Варшава: пн/ср/пт, 09:00"
-    ]
-};
-
-// Текущее количество отображаемых отзывов
+// Глобальные переменные
+let reviews = [];
 let currentDisplayCount = 3;
 
-// Функция сохранения отзывов
-function saveReviews() {
-    localStorage.setItem('inDriver72_reviews', JSON.stringify(reviews));
+// Функции для отображения данных, загруженных из Supabase
+function renderFeatures(features) {
+    const container = document.querySelector('.features-grid');
+    if (!container) return;
+    container.innerHTML = features.map(f => `
+        <div class="feature-item">
+            <i class="fas ${f.icon}"></i>
+            <h3>${f.title}</h3>
+            <p>${f.description}</p>
+        </div>
+    `).join('');
+}
+
+function renderContacts(contacts) {
+    const phoneSpan = document.querySelector('.contact-info span');
+    if (phoneSpan) phoneSpan.innerHTML = `<i class="fas fa-phone-alt"></i> ${contacts.phone}`;
+    const telegramBtn = document.querySelector('.contact-btn.telegram');
+    if (telegramBtn) telegramBtn.href = contacts.telegram;
+    const whatsappBtn = document.querySelector('.contact-btn.whatsapp');
+    if (whatsappBtn) whatsappBtn.href = contacts.whatsapp;
+    const viberBtn = document.querySelector('.contact-btn.viber');
+    if (viberBtn) viberBtn.href = contacts.viber;
+    const vkBtn = document.querySelector('.contact-btn.vk');
+    if (vkBtn) vkBtn.href = contacts.vk;
+    const maxBtn = document.getElementById('max-btn');
+    if (maxBtn) maxBtn.href = contacts.max;
+}
+
+function renderInfo(offers, schedule) {
+    const offersList = document.querySelector('.offers ul');
+    if (offersList) offersList.innerHTML = offers.map(o => `<li>${o}</li>`).join('');
+    const scheduleList = document.querySelector('.schedule ul');
+    if (scheduleList) scheduleList.innerHTML = schedule.map(s => `<li>${s}</li>`).join('');
+}
+
+// Асинхронная функция загрузки всех данных из Supabase
+async function loadAllDataFromSupabase() {
+    try {
+        // 1. Hero
+        let { data: hero, error } = await window.supabase
+            .from('hero')
+            .select('*')
+            .single();
+        if (error) console.error('Ошибка загрузки hero:', error);
+        else {
+            document.querySelector('.hero h1').innerHTML = hero.title;
+            document.querySelector('.hero .subhead').textContent = hero.subtitle;
+        }
+
+        // 2. Features
+        let { data: features, error: featError } = await window.supabase
+            .from('features')
+            .select('*')
+            .order('sort_order', { ascending: true });
+        if (!featError && features) renderFeatures(features);
+
+        // 3. Reviews
+        let { data: reviewsData, error: revError } = await window.supabase
+            .from('reviews')
+            .select('*')
+            .order('date', { ascending: false });
+        if (!revError && reviewsData) {
+            reviews = reviewsData;
+            renderReviews();
+        }
+
+        // 4. Contacts
+        let { data: contacts, error: contError } = await window.supabase
+            .from('contacts')
+            .select('*')
+            .single();
+        if (!contError && contacts) renderContacts(contacts);
+
+        // 5. Info
+        let { data: info, error: infoError } = await window.supabase
+            .from('info')
+            .select('*')
+            .single();
+        if (!infoError && info) renderInfo(info.offers, info.schedule);
+
+    } catch (e) {
+        console.error('Общая ошибка загрузки:', e);
+    }
+}
+
+// Функция сохранения отзывов в Supabase
+async function saveReviews() {
+    const { error } = await window.supabase
+        .from('reviews')
+        .upsert(reviews);
+    if (error) {
+        console.error('Ошибка сохранения отзывов:', error);
+    } else {
+        console.log('Отзывы сохранены в Supabase');
+    }
 }
 
 // Рендер галереи
@@ -215,19 +153,6 @@ function renderGallery() {
     if (typeof GLightbox !== 'undefined') {
         GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true, zoomable: true });
     }
-}
-
-// Рендер преимуществ
-function renderFeatures() {
-    const container = document.querySelector('.features-grid');
-    if (!container) return;
-    container.innerHTML = features.map(f => `
-        <div class="feature-item">
-            <i class="fas ${f.icon}"></i>
-            <h3>${f.title}</h3>
-            <p>${f.text}</p>
-        </div>
-    `).join('');
 }
 
 // Рендер отзывов с кнопкой "Подробнее"
@@ -289,36 +214,6 @@ function renderReviews() {
     if (hideBtn) {
         hideBtn.style.display = currentDisplayCount > 3 ? 'inline-block' : 'none';
     }
-}
-
-// Рендер акций и расписания
-function renderInfo() {
-    const offersList = document.querySelector('.offers ul');
-    const scheduleList = document.querySelector('.schedule ul');
-    if (offersList) {
-        offersList.innerHTML = infoData.offers.map(offer => `<li>${offer}</li>`).join('');
-    }
-    if (scheduleList) {
-        scheduleList.innerHTML = infoData.schedule.map(item => `<li>${item}</li>`).join('');
-    }
-}
-
-// Рендер контактов
-function renderContacts() {
-    const phoneSpan = document.querySelector('.contact-info span');
-    if (phoneSpan) {
-        phoneSpan.innerHTML = `<i class="fas fa-phone-alt" style="margin-right: 6px;"></i> ${contacts.phone}`;
-    }
-    const telegramBtn = document.querySelector('.contact-btn.telegram');
-    const whatsappBtn = document.querySelector('.contact-btn.whatsapp');
-    const viberBtn = document.querySelector('.contact-btn.viber');
-    const vkBtn = document.querySelector('.contact-btn.vk');
-    const maxBtn = document.getElementById('max-btn');
-    if (telegramBtn) telegramBtn.href = contacts.telegram;
-    if (whatsappBtn) whatsappBtn.href = contacts.whatsapp;
-    if (viberBtn) viberBtn.href = contacts.viber;
-    if (vkBtn) vkBtn.href = contacts.vk;
-    if (maxBtn) maxBtn.href = contacts.max;
 }
 
 // Функции управления отзывами
@@ -453,7 +348,7 @@ function initModals() {
     });
 
     if (reviewForm) {
-        reviewForm.addEventListener('submit', (e) => {
+        reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const newReview = {
                 name: document.getElementById('reviewName').value,
@@ -463,7 +358,7 @@ function initModals() {
                 date: new Date().toISOString().split('T')[0]
             };
             reviews.unshift(newReview);
-            saveReviews();
+            await saveReviews();
             currentDisplayCount = 3;
             renderReviews();
             reviewForm.reset();
@@ -519,15 +414,7 @@ function initMaxLinks() {
 // Запуск после загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllDataFromSupabase();
-    document.querySelector('.hero h1').innerHTML = heroData.title;
-    document.querySelector('.hero .subhead').textContent = heroData.subtitle;
-
-    renderFeatures();
     renderGallery();
-    renderReviews();
-    renderInfo();
-    renderContacts();
-
     initFaq();
     initModals();
     initScrollEffects();
