@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель inDriver72</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Управление сайтом inDriver72</h1>
+        
+        <div id="loginForm" class="login-section">
+            <h2>Вход в панель управления</h2>
+            <input type="password" id="adminPassword" placeholder="Пароль">
+            <button onclick="checkPassword()">Войти</button>
+        </div>
+
+        <div id="adminPanel" style="display: none;">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('hero')">Главный блок</button>
+                <button class="tab-btn" onclick="showTab('features')">Преимущества</button>
+                <button class="tab-btn" onclick="showTab('reviews')">Отзывы</button>
+                <button class="tab-btn" onclick="showTab('contacts')">Контакты</button>
+                <button class="tab-btn" onclick="showTab('info')">Акции и расписание</button>
+            </div>
+
+            <!-- Вкладка Hero -->
+            <div id="heroTab" class="tab-content active">
+                <h3>Редактирование Hero-блока</h3>
+                <div class="form-group">
+                    <label>Заголовок (можно использовать &lt;br&gt; для переноса):</label>
+                    <textarea id="heroTitle" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Подзаголовок:</label>
+                    <textarea id="heroSubtitle" rows="3" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <!-- Вкладка Features (4 преимущества) -->
+            <div id="featuresTab" class="tab-content">
+                <h3>Редактирование преимуществ</h3>
+                <div id="features-list"></div>
+                <button class="btn-add" onclick="addFeature()">+ Добавить преимущество</button>
+            </div>
+
+            <!-- Вкладка Reviews (отзывы) -->
+            <div id="reviewsTab" class="tab-content">
+                <h3>Управление отзывами</h3>
+                <div id="reviews-list"></div>
+                <button class="btn-add" onclick="addReview()">+ Добавить отзыв</button>
+            </div>
+
+            <!-- Вкладка Contacts (контакты) -->
+            <div id="contactsTab" class="tab-content">
+                <h3>Редактирование контактов</h3>
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input type="text" id="contactPhone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Telegram (ссылка):</label>
+                    <input type="text" id="contactTelegram" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp (ссылка):</label>
+                    <input type="text" id="contactWhatsapp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Viber (ссылка):</label>
+                    <input type="text" id="contactViber" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>VK (ссылка):</label>
+                    <input type="text" id="contactVk" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>MAX (ссылка):</label>
+                    <input type="text" id="contactMax" class="form-control">
+                </div>
+            </div>
+
+            <!-- Вкладка Info (акции и расписание) -->
+            <div id="infoTab" class="tab-content">
+                <h3>Акции и расписание</h3>
+                <div class="form-group">
+                    <label>Акции (каждая с новой строки):</label>
+                    <textarea id="offersList" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Расписание (каждая строка — один рейс):</label>
+                    <textarea id="scheduleList" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <button onclick="saveAllData()" class="btn-save">Сохранить все изменения</button>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+                // Создаем клиента для работы с твоим проектом
+            const supabaseUrl = 'https://mqpkzzxwmgjxhczryebs.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xcGt6enh3bWdqeGhjenJ5ZWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDc1MTIsImV4cCI6MjA4NzU4MzUxMn0.g1MD9v3yKMmZn9TseMC72VHi7P8yDpHOUFZhWHKOTsY';
+         window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    </script>
+</body>
+</html>
