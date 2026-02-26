@@ -49,19 +49,17 @@ function renderFeatures(features) {
     `).join('');
 }
 
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ renderContacts
 function renderContacts(contacts) {
     const phoneSpan = document.querySelector('.contact-info span');
     if (phoneSpan) phoneSpan.innerHTML = `<i class="fas fa-phone-alt"></i> ${contacts.phone}`;
-    const telegramBtn = document.querySelector('.contact-btn.telegram');
-    if (telegramBtn) telegramBtn.href = contacts.telegram;
-    const whatsappBtn = document.querySelector('.contact-btn.whatsapp');
-    if (whatsappBtn) whatsappBtn.href = contacts.whatsapp;
-    const viberBtn = document.querySelector('.contact-btn.viber');
-    if (viberBtn) viberBtn.href = contacts.viber;
-    const vkBtn = document.querySelector('.contact-btn.vk');
-    if (vkBtn) vkBtn.href = contacts.vk;
-    const maxBtn = document.getElementById('max-btn');
-    if (maxBtn) maxBtn.href = contacts.max;
+
+    // Обновляем все кнопки с соответствующими классами
+    document.querySelectorAll('.contact-btn.telegram').forEach(btn => btn.href = contacts.telegram);
+    document.querySelectorAll('.contact-btn.whatsapp').forEach(btn => btn.href = contacts.whatsapp);
+    document.querySelectorAll('.contact-btn.viber').forEach(btn => btn.href = contacts.viber);
+    document.querySelectorAll('.contact-btn.vk').forEach(btn => btn.href = contacts.vk);
+    document.querySelectorAll('.contact-btn.max').forEach(btn => btn.href = contacts.max);
 }
 
 function renderInfo(offers, schedule) {
@@ -425,26 +423,13 @@ function initScrollEffects() {
     update();
 }
 
-// Ссылки MAX
-function initMaxLinks() {
-    document.querySelectorAll('#max-link, #max-link-hero, #max-btn').forEach(el => {
-        if (el) {
-            el.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.open('https://max.ru', '_blank');
-            });
-        }
-    });
-}
-
 // Запуск после загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllDataFromSupabase();
     renderGallery();
     initModals();
     initScrollEffects();
-    initMaxLinks();
-
+    
     document.getElementById('loadMoreReviews')?.addEventListener('click', (e) => {
         e.preventDefault();
         loadMoreReviews();

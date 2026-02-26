@@ -1172,3 +1172,38 @@ body.dark-theme .btn-more {
 body.dark-theme .btn-more:hover {
     color: #7BB0FF;
 }
+
+/* Иконки соцсетей в hero-блоке (возвращаем исходный вид) */
+.hero .contact-btn {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: inherit !important;
+    line-height: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .contact-btn i {
+    font-size: 2rem; /* сохраняем размер, который был у fa-2x */
+    color: #1D1D1F;
+    transition: color 0.2s;
+}
+
+.hero .contact-btn:hover i {
+    color: #007AFF;
+}
+
+/* Тёмная тема */
+body.dark-theme .hero .contact-btn i {
+    color: #F5F5F7;
+}
+
+body.dark-theme .hero .contact-btn:hover i {
+    color: #5C9EFF;
+}
